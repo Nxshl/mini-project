@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accident Severity Prediction</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: url("https://images.unsplash.com/photo-1533132902598-b968c193a3c7?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGxhbmUlMjBjcmFzaHxlbnwwfHwwfHx8MA%3D%3D")
+          no-repeat center center fixed;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background-color: rgba(255, 255, 255, 0.85);
+        padding: 40px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #333;
+      }
+      p {
+        font-size: 1em;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      label {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      input[type="text"] {
+        padding: 8px;
+        font-size: 0.9em;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .submit-btn {
+        grid-column: span 2;
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .submit-btn:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        font-weight: bold;
+        color: #007bff;
+      }
+      .input-group {
+        margin-bottom: 2px; /* Adds space between each input group */
+      }
+
+      input[type="text"] {
+        padding: 10px; /* Adds padding within each input field */
+        width: 95%; /* Adjusts width to fit nicely within the container */
+        margin-top: 5px; /* Adds space between label and input */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Airplane Accident Severity Prediction</h1>
+      <p>
+        Enter the details below to predict the severity of the airplane
+        accident.
+      </p>
+
+      <form method="POST" action="/predict">
+        <div class="input-group">
+          <label for="Safety_Score">Safety Score:</label>
+          <input type="text" name="Safety_Score" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Days_Since_Inspection">Days Since Inspection:</label>
+          <input type="text" name="Days_Since_Inspection" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Total_Safety_Complaints">Total Safety Complaints:</label>
+          <input type="text" name="Total_Safety_Complaints" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Control_Metric">Control Metric:</label>
+          <input type="text" name="Control_Metric" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Turbulence_In_gforces">Turbulence In g-forces:</label>
+          <input type="text" name="Turbulence_In_gforces" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Cabin_Temperature">Cabin Temperature:</label>
+          <input type="text" name="Cabin_Temperature" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Accident_Type_Code">Accident Type Code:</label>
+          <input type="text" name="Accident_Type_Code" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Max_Elevation">Max Elevation:</label>
+          <input type="text" name="Max_Elevation" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Violations">Violations:</label>
+          <input type="text" name="Violations" required />
+        </div>
+
+        <div class="input-group">
+          <label for="Adverse_Weather_Metric">Adverse Weather Metric:</label>
+          <input type="text" name="Adverse_Weather_Metric" required />
+        </div>
+
+        <input type="submit" value="Predict" class="submit-btn" />
+      </form>
+
+      {% if prediction %}
+      <h3>
+        The flight is likely predicted to have:
+        <span class="result">{{ prediction }}</span>
+      </h3>
+      {% endif %}
+    </div>
+  </body>
+</html>
